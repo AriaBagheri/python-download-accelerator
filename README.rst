@@ -54,7 +54,7 @@ Overview
 .. |supported-implementations| image:: https://img.shields.io/pypi/implementation/download-accelerator.svg
     :alt: Supported implementations
     :target: https://pypi.org/project/download-accelerator
-:: |version| 1.0.0
+:: |version| v1.0.1.
 
 
 .. end-badges
