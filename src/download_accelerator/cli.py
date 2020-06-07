@@ -6,7 +6,7 @@ Why does this file exist, and why not put this in __main__?
   You might be tempted to import things from __main__ later, but that will cause
   problems: the code will get executed twice:
 
-  - When you run `python -mdownload_accelerator` python will execute
+  - When you run `python -m download_accelerator` python will execute
     ``__main__.py`` as a script. That means there won't be any
     ``download_accelerator.__main__`` in ``sys.modules``.
   - When you import __main__ it will get executed again (as a module) because
@@ -35,6 +35,8 @@ def download(link: str, output: str = "", connections: int = 32, return_bytes: b
     Returns: if return_bytes will return all the bytes downloaded.
 
     """
+    if not(output or return_bytes):
+        raise argh.CommandError("you have to specify either output or return_bytes")
     loop = asyncio.get_event_loop()
     try:
         content: bytes = loop.run_until_complete(parallel_download(link, connections, disable_progress_bar))
