@@ -25,7 +25,7 @@ def read(*names, **kwargs):
 
 setup(
     name='download-accelerator',
-    version='0.0.1',
+    version='1.0.0',
     license='MIT',
     description='A python accelerator based on python',
     long_description='%s\n%s' % (

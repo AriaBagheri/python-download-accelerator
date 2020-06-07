@@ -55,9 +55,9 @@ Overview
     :alt: Supported implementations
     :target: https://pypi.org/project/download-accelerator
 
-.. |commits-since| image:: https://img.shields.io/github/commits-since/AriaBagheri/python-download-accelerator/v0.0.1.svg
+.. |commits-since| image:: https://img.shields.io/github/commits-since/AriaBagheri/python-download-accelerator/v1.0.0.svg
     :alt: Commits since latest release
-    :target: https://github.com/AriaBagheri/python-download-accelerator/compare/v0.0.1...master
+    :target: https://github.com/AriaBagheri/python-download-accelerator/compare/v1.0.0...master
 
 
 
