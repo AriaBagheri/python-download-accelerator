@@ -8,7 +8,15 @@ Why does this file exist, and why __main__? For more info, read:
 - https://docs.python.org/2/using/cmdline.html#cmdoption-m
 - https://docs.python.org/3/using/cmdline.html#cmdoption-m
 """
-from download_accelerator.cli import main
 
-if __name__ == "__main__":
-    main()
+import argh
+
+from download_accelerator.cli import download
+
+parser = argh.ArghParser()
+parser.add_commands([download])
+
+# dispatching:
+
+if __name__ == '__main__':
+    parser.dispatch()

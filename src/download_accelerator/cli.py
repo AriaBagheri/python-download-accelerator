@@ -14,10 +14,42 @@ Why does this file exist, and why not put this in __main__?
 
   Also see (1) from http://click.pocoo.org/5/setuptools/#setuptools-integration
 """
-import click
+import asyncio
+
+import argh
+
+from .file_tools import write_to_file
+from .network_tools import parallel_download
 
 
-@click.command()
-@click.argument('names', nargs=-1)
-def main(names):
-    click.echo(repr(names))
+def download(link: str, output: str = "", connections: int = 32, return_bytes: bool = False,
+             disable_progress_bar: bool = False):
+    """
+    Download a link using parallel multiple connections
+    Args:
+        link: a link to download.
+        output: Output to save your link to. if you set return_bytes=True then this output will be ignored.
+        connections: number of parallel connections that is used to download your link.
+        return_bytes: if true the method will return the bytes other than writing them to output
+        disable_progress_bar: if true. the program won't show a progress bar.
+    Returns: if return_bytes will return all the bytes downloaded.
+
+    """
+    loop = asyncio.get_event_loop()
+    try:
+        content: bytes = loop.run_until_complete(parallel_download(link, connections, disable_progress_bar))
+        if return_bytes:
+            return content
+        write_to_file(output, content, "downloaded files")
+        return None
+    finally:
+        loop.close()
+
+
+parser = argh.ArghParser()
+parser.add_commands([download])
+
+# dispatching:
+
+if __name__ == '__main__':
+    parser.dispatch()
